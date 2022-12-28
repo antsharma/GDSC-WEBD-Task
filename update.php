@@ -3,24 +3,9 @@
   <?php
   include ('connection.php');
   error_reporting(0);
-$_GET['formin']
-//   $userName = $_POST['fname'];
-//   $userID = $_POST['enumber'];
-  
-//   if(!$_POST['sbutton'])
-//   {
-//       echo "All fields are required";
-//    }
-//   else{
-//     $sql = "INSERT into Data (Name, ID)
-//     values ('$userName', '$userID') ";
-//     if (mysqli_query ($conn, $sql) ){
-//       echo "Data creation successful";}
-//   else{
-//       echo "Something went wrong, try later";
-  
-//   }
-// }
+$rn= $_GET['rn'];
+$fn= $_GET['fn'];
+
   ?>
 
 <style>
@@ -30,7 +15,7 @@ $_GET['formin']
     form{
         margin-left: 20px;
      }
-    #formin{
+    #fname{
         width: 300px;
         border: 0px;
         border-bottom: 2px solid #eee;
@@ -59,8 +44,8 @@ $_GET['formin']
 <h2>Edit Student Details</h2>
 
 <form action="form.php" method ="POST">
-  Enter Name: <input type="text" id="formin" name="fname" Placeholder="Full Name" required><br><br>
-  Enter Enrollment Number:<input type="text" id="formin" name="enumber" Placeholder="Enrollment Number" required><br><br>
+  Enter Name: <input type="text" id="fname" name="fullname" value="<?php echo"$fn" ?>" required><br><br>
+  Enter Enrollment Number:<input type="text" id="fname" name="rollno" value="<?php echo"$rn" ?>" required><br><br>
  
   For saving details: &nbsp;&nbsp;<input type="submit" id="formbtn" name="sbutton" value="Submit"><br><br>
  
@@ -71,3 +56,31 @@ $_GET['formin']
 </body>
 </html>
 
+<?php
+
+if ($_GET['sbutton'])
+{
+$rollno = $_GET['ID'];
+$name = $_GET['fullname'];
+
+
+$get_data = "UPDATE DATA SET ID='$rollno', Name='$name' WHERE ID = '$rollno', Name='$name' ";
+$query_data = mysqli_query($conn, $get_data);
+if ($query_dat)
+{
+
+echo "<script>alert ('Record Updated') </script>";
+?>
+    <META HTTP-EQUIV="Refresh" CONTENT="0; URL=http://localhost/GDSC/fetchdata.php">
+   
+   <?php 
+}
+
+else
+
+{
+echo "Failed to Update Record";
+
+}
+}
+?>
